@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap');
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#central{
+    margin: 30px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    grid-auto-flow: row ;
+}
+
+.pokemonCard{
+    width: auto;
+    height: 40vh;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    background-color: red;
+}
+
+.pokemonCard__details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pokemonCard__details--title{
+    font-size: 24px;
+    color: white;
+}
+
+.pokemonCard__details--pokemonId{
+    margin-top: 10px;
+    color: white;
+}
+
+.pokemonCard__details--image{
+    height: 180px;
+}
+
+.pokemonCard__details--types{
+    color: white;
+}
+
+.grass{
+    background-color: green;
+}
+
+.poison{
+    background-color: violet;
+}
+
+.fire{
+    background-color: red;
+}
+
+.water{
+    background-color: blue;
+}
