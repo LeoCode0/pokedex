@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap');
 
+:root{
+    --color-light: white;
+    --color-dark: black;
+}
+
 body{
     margin: 0;
     padding: 0;
@@ -10,6 +15,11 @@ body{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+.title{
+    margin-top: 20px;
+    text-align: center;
 }
 
 #central{
@@ -38,12 +48,12 @@ body{
 
 .pokemonCard__details--title{
     font-size: 24px;
-    color: white;
+    color: var(--color-dark);
 }
 
 .pokemonCard__details--pokemonId{
     margin-top: 10px;
-    color: white;
+    color: var(--color-dark);
 }
 
 .pokemonCard__details--image{
@@ -51,7 +61,7 @@ body{
 }
 
 .pokemonCard__details--types{
-    color: white;
+    color: var(--color-dark);
 }
 
 .grass{
@@ -68,4 +78,46 @@ body{
 
 .water{
     background-color: blue;
+}
+
+.bug{
+    color: black;
+    background-color: lightgreen;
+}
+
+.normal{
+    color: black;
+    background-color: lightgray;
+}
+
+.flying{
+    color: black;
+    background-color: silver;
+}
+
+.electric{
+    color: black;
+    background-color: yellow;
+}
+
+.ground{
+    background-color: brown;
+}
+
+.psychic{
+    background-color: purple;
+}
+
+.rock{
+    background-color: lightslategray;
+}
+
+.steel{
+    color: black;
+    background-color: silver;
+}
+
+.ice{
+    color: black;
+    background-color: snow;
 }
