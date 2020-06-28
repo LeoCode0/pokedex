@@ -2,7 +2,7 @@ const api = 'https://pokeapi.co/api/v2';
 
 const central = document.getElementById('central')
 
-const pokemonCard = async ({ url }) => {
+const getDataPokemons = async({ url }) => {
     const data = await getData(url)
     const pokemonId = data.id
     const pokemonName = data.name
@@ -14,21 +14,48 @@ const pokemonCard = async ({ url }) => {
     let firstType = [ data.types.map(id => id.type.name)][0][0]
     let secondType = [ data.types.map(id => id.type.name)][0][1]
     secondType = checkUndefined(secondType)
+
+    return{
+        data,
+        pokemonId,
+        pokemonName,
+        pokemonImage,
+        height,
+        weight,
+        pokemonSpecies,
+        description,
+        firstType,
+        secondType
+    }
+}
+
+const resetText = (text) => {
+    const sizeText = text.length
+    const firstLetter = text.substr(0, 1).toUpperCase()
+    const nextLetters = text.substr(1, sizeText).toLowerCase()
+
+    const newText = `${firstLetter}${nextLetters}`
+    return newText
+}
+
+const pokemonCard = async (dataPokemon) => {
+    const textReset = resetText(dataPokemon.description)
+
     let template = `
     <div class="pokemonCard__details">
         <h1 class="pokemonCard__details--title">
-        ${pokemonName} 
+        ${dataPokemon.pokemonName} 
         </h1>
         <span class="pokemonCard__details--pokemonId">
-            ID: ${pokemonId}
+            ID: ${dataPokemon.pokemonId}
         </span>
-        <img src=${pokemonImage} alt=${pokemonName} class="pokemonCard__details--image"/>
+        <img src=${dataPokemon.pokemonImage} alt=${dataPokemon.pokemonName} class="pokemonCard__details--image"/>
         <div class="pokemonCard__details--types">
-            <span class="${firstType}">
-                ${firstType}
+            <span class="type ${dataPokemon.firstType}">
+                ${dataPokemon.firstType}
             </span>
-            <span class="${secondType}">
-                ${secondType}
+            <span class="type ${dataPokemon.secondType}">
+                ${dataPokemon.secondType}
             </span>
         </div>
     </div>
@@ -37,13 +64,13 @@ const pokemonCard = async ({ url }) => {
             Pokemon Information
         </h1>
         <p class="pokemonCard__skills--description">
-            ${description.toLocaleLowerCase('en-US')}
+            ${textReset}
         </p>
         <span class="pokemonCard__skills--height">
-            ${height} Meters
+            ${dataPokemon.height} Meters
         </span>
         <span class="pokemonCard__skills--weight">
-            ${weight} Kilograms
+            ${dataPokemon.weight} Kilograms
         </span>
     </div>
     `
@@ -73,9 +100,11 @@ const printPokemon = async () => {
     for(let index = 0; index <= 10; index++){
         if (index %20 === 0){
             for(let i = 0; i <= 19; i++){
-                const container = document.createElement('div')
+                const container = document.createElement('div') 
                 container.className = 'pokemonCard'
-                container.innerHTML = await pokemonCard(results[i]) 
+                let dataPokemon =  await getDataPokemons(results[i])
+                container.innerHTML = await pokemonCard(dataPokemon) 
+                container.classList.add(dataPokemon.firstType)
                 central.appendChild(container)
                 if (results[i].name === 'mewtwo'){
                     index = 150
@@ -90,6 +119,7 @@ const printPokemon = async () => {
         }
     }
 }
+
 
 
 // const test = async () => {
@@ -112,18 +142,4 @@ const printPokemon = async () => {
 
 // test()
 
-
 printPokemon()
-
-
-
-// const main =  async () => {
-//     const data = await getData(api);
-//     const pokemonURL = data.results;
-//     console.log(pokemonURL.map(x => x.url));
-//     // const getPokemon = await getData(pokemonURL);
-//     // const test = getPokemon.types;
-//     // console.log(test.map(x => x.type.name));
-// }
-
-// main()

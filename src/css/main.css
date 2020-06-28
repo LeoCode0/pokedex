@@ -3,6 +3,30 @@
 :root{
     --color-light: white;
     --color-dark: black;
+    /* --bg-fighting:;
+    --bg-poison:;
+    --bg-flying:;
+    --bg-ground:; 
+    --bg-rock:; 
+    --bg-ghost:; 
+    --bg-steel:; 
+    --bg-dark:; 
+    --bg-dragon:; 
+    --bg-electric:;
+    --bg-fairy:; 
+    --bg-psychic:; 
+    --bg-ice:; */
+    --border-card: 6px solid;
+    --bg-grass: lightgreen;
+    --bg-fire: #f7a399;
+    --bg-water: #0077b6;
+    --bg-bug: #55a630;
+    --bg-Normal: #5c6b73;
+    --color-grass-strong: green;
+    --color-fire-strong: #ef6351;
+    --color-water-strong: #023e8a;
+    --color-bug-strong: #007f5f;
+    --color-normal-strong: #253237;
 }
 
 body{
@@ -37,7 +61,7 @@ body{
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
-    background-color: red;
+    border-radius: 12px;
 }
 
 .pokemonCard__details{
@@ -47,6 +71,7 @@ body{
 }
 
 .pokemonCard__details--title{
+    text-transform: capitalize;
     font-size: 24px;
     color: var(--color-dark);
 }
@@ -64,60 +89,103 @@ body{
     color: var(--color-dark);
 }
 
-.grass{
-    background-color: green;
+.type{
+    padding: 4px 5px;
+    margin: 0 6px;
 }
 
-.poison{
-    background-color: violet;
+.grass{
+    background-color: var(--bg-grass);
+    border: var(--border-card) var(--color-grass-strong);
 }
 
 .fire{
-    background-color: red;
+    background-color: var(--bg-fire);
+    border: var(--border-card) var(--color-fire-strong);
 }
 
 .water{
-    background-color: blue;
+    background-color: var(--bg-water);
+    border: var(--border-card) var(--color-water-strong);
 }
 
 .bug{
-    color: black;
-    background-color: lightgreen;
+    background-color: var(--bg-bug);
+    border: var(--border-card) var(--color-bug-strong)
 }
 
 .normal{
-    color: black;
-    background-color: lightgray;
+    background-color: var(--bg-Normal);
+    border: var(--border-card) var(--color-normal-strong);
 }
 
-.flying{
+.type.grass{
+    background-color: var(--color-grass-strong);
+    border: 0;
+}
+
+.type.poison{
+    background-color: violet;
+    border: 0;
+}
+
+.type.fire{
+    background-color: var(--color-fire-strong);
+    border: 0;
+}
+
+.type.water{
+    background-color: blue;
+    border: 0;
+}
+
+.type.bug{
+    color: white;
+    background-color: var(--color-bug-strong);
+    border: 0;
+}
+
+.type.normal{
+    color: white;
+    background-color: var(--color-normal-strong);
+    border: 0;
+}
+
+.type.flying{
     color: black;
     background-color: silver;
+    border: 0;
 }
 
-.electric{
+.type.electric{
     color: black;
     background-color: yellow;
+    border: 0;
 }
 
-.ground{
+.type.ground{
     background-color: brown;
+    border: 0;
 }
 
-.psychic{
+.type.psychic{
     background-color: purple;
+    border: 0;
 }
 
-.rock{
+.type.rock{
     background-color: lightslategray;
+    border: 0;
 }
 
-.steel{
+.type.steel{
     color: black;
     background-color: silver;
+    border: 0;
 }
 
-.ice{
+.type.ice{
     color: black;
     background-color: snow;
+    border: 0;
 }
