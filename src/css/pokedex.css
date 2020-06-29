@@ -48,6 +48,10 @@ body{
     border: 0;
 }
 
+.pokedex__specify--name{
+    text-transform: capitalize;
+}
+
 #weight, #height{
     font-weight: 900;
 }
