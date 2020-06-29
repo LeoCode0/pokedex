@@ -7,6 +7,7 @@ const pokemonName = document.getElementById('name')
 const pokemonDescription = document.getElementById('description')
 const pokemonWeight = document.getElementById('weight')
 const pokemonHeight = document.getElementById('height')
+const pokemonId = document.getElementById('id')
 
 const getDataPokemons = async({ url }) => {
     const data = await getData(url)
@@ -126,16 +127,37 @@ const printPokemon = async () => {
     }
 }
 
-const test = async () => {
-    let base = await getData(`${api}/pokemon`)
-    let results = await base.results
-    let pokemonNumber = 0
-    pokemonName.innerHTML = results[pokemonNumber].name
-    pokemonImage.setAttribute
+let pokemonNumber = 19
+const nextPokemon = () => {
+    pokemonNumber += 1
+    if (pokemonNumber === 151){
+        pokemonNumber = 0
+    }
+    test(pokemonNumber)
 }
 
+const test = async (number) => {
+    let base = await getData(`${api}/pokemon`)
+    let results = await base.results
+    let pokemon = results[number]
+    const dataPokemon = await getDataPokemons(pokemon)
+    const textReset = resetText(dataPokemon.description)
+    pokemonName.innerHTML = pokemon.name
+    pokemonDescription.innerHTML = textReset
+    pokemonImage.setAttribute('src', dataPokemon.pokemonImage)
+    pokemonFirstType.innerHTML = dataPokemon.firstType
+    pokemonSecondType.innerHTML = dataPokemon.secondType
+    pokemonHeight.innerHTML = dataPokemon.height
+    pokemonWeight.innerHTML = dataPokemon.weight
+    pokemonId.innerHTML = dataPokemon.pokemonId
+}
 
-test()
+test(pokemonNumber)
+
+
+
+
+const previouslyPokemon = (pokemonNumber) => pokemonNumber - 1
 // const test = async () => {
 //     let base = await getData(api)
 //     let results = await base.results
