@@ -8,6 +8,35 @@ body{
     box-sizing: border-box;
 }
 
+:root{
+    --color-light: white;
+    --color-dark: black;
+    /* --bg-fighting:;
+    --bg-poison:;
+    --bg-flying:;
+    --bg-ground:; 
+    --bg-rock:; 
+    --bg-ghost:; 
+    --bg-steel:; 
+    --bg-dark:; 
+    --bg-dragon:; 
+    --bg-electric:;
+    --bg-fairy:; 
+    --bg-psychic:; 
+    --bg-ice:; */
+    --border-card: 6px solid;
+    --bg-grass: lightgreen;
+    --bg-fire: #f7a399;
+    --bg-water: #0077b6;
+    --bg-bug: #55a630;
+    --bg-Normal: #5c6b73;
+    --color-grass-strong: green;
+    --color-fire-strong: #ef6351;
+    --color-water-strong: #023e8a;
+    --color-bug-strong: #007f5f;
+    --color-normal-strong: #253237;
+}
+
 .pokedex{
     height: 90vh;
     width: 90vw;
@@ -26,6 +55,19 @@ body{
     padding: 5vh 5vw;
     border-right: 2px solid black;
 }
+
+.pokedex__general--image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 36vh;
+    width: 100%;
+}
+
+.general--image__img{
+    height: 100%;
+}
+
 
 .pokedex__general--arrows{
     font-size: 60px;
@@ -54,4 +96,30 @@ body{
 
 #weight, #height{
     font-weight: 900;
+}
+
+
+.grass{
+    background-color: var(--bg-grass);
+    border: var(--border-card) var(--color-grass-strong);
+}
+
+.fire{
+    background-color: var(--bg-fire);
+    border: var(--border-card) var(--color-fire-strong);
+}
+
+.water{
+    background-color: var(--bg-water);
+    border: var(--border-card) var(--color-water-strong);
+}
+
+.bug{
+    background-color: var(--bg-bug);
+    border: var(--border-card) var(--color-bug-strong)
+}
+
+.normal{
+    background-color: var(--bg-Normal);
+    border: var(--border-card) var(--color-normal-strong);
 }

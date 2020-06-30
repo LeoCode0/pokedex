@@ -1,5 +1,6 @@
 const api = 'https://pokeapi.co/api/v2';
 
+const imageContainer = document.getElementById('container_image')
 const pokemonImage = document.getElementById('image')
 const pokemonFirstType = document.getElementById('firstType')
 const pokemonSecondType = document.getElementById('secondType')
@@ -8,6 +9,19 @@ const pokemonDescription = document.getElementById('description')
 const pokemonWeight = document.getElementById('weight')
 const pokemonHeight = document.getElementById('height')
 const pokemonId = document.getElementById('id')
+
+let pokemonNumber = 0
+let base = `${api}/pokemon`
+let nextPage
+
+let actualBase
+
+const getData = async (API) => {
+    const response = await fetch(API);
+    const json = await response.json();
+
+    return json
+};
 
 const getDataPokemons = async({ url }) => {
     const data = await getData(url)
@@ -45,45 +59,6 @@ const resetText = (text) => {
     return newText
 }
 
-const pokemonCard = async (dataPokemon) => {
-    const textReset = resetText(dataPokemon.description)
-
-    let template = `
-    <div class="pokemonCard__details">
-        <h1 class="pokemonCard__details--title">
-        ${dataPokemon.pokemonName} 
-        </h1>
-        <span class="pokemonCard__details--pokemonId">
-            ID: ${dataPokemon.pokemonId}
-        </span>
-        <img src=${dataPokemon.pokemonImage} alt=${dataPokemon.pokemonName} class="pokemonCard__details--image"/>
-        <div class="pokemonCard__details--types">
-            <span class="type ${dataPokemon.firstType}">
-                ${dataPokemon.firstType}
-            </span>
-            <span class="type ${dataPokemon.secondType}">
-                ${dataPokemon.secondType}
-            </span>
-        </div>
-    </div>
-    <div class="pokemonCard__skills">
-        <h1 class="pokemonCard__skills--title">
-            Pokemon Information
-        </h1>
-        <p class="pokemonCard__skills--description">
-            ${textReset}
-        </p>
-        <span class="pokemonCard__skills--height">
-            ${dataPokemon.height} Meters
-        </span>
-        <span class="pokemonCard__skills--weight">
-            ${dataPokemon.weight} Kilograms
-        </span>
-    </div>
-    `
-    return template
-}
-
 const checkUndefined = (variable) => {
     if (variable === undefined){
         return ''
@@ -93,88 +68,52 @@ const checkUndefined = (variable) => {
 }
 
 
-const getData = async (API) => {
-    const response = await fetch(API);
-    const json = await response.json();
-
-    return json
-};
-
-const printPokemon = async () => {
-    let base = await getData(`${api}/pokemon`)
-    let results = await base.results
-    let nextPage = await base.next
-    for(let index = 0; index <= 10; index++){
-        if (index %20 === 0){
-            for(let i = 0; i <= 19; i++){
-                const container = document.createElement('div') 
-                container.className = 'pokemonCard'
-                let dataPokemon =  await getDataPokemons(results[i])
-                container.innerHTML = await pokemonCard(dataPokemon) 
-                container.classList.add(dataPokemon.firstType)
-                central.appendChild(container)
-                if (results[i].name === 'mewtwo'){
-                    index = 150
-                    break;
-                }
-                if (i === 19){
-                    base = await getData(nextPage),
-                    results = await base.results,
-                    nextPage = await base.next
-                }
-            }
-        }
-    }
-}
-
-let pokemonNumber = 19
 const nextPokemon = () => {
     pokemonNumber += 1
-    if (pokemonNumber === 151){
+    if (pokemonNumber === 20){
+        base = nextPage
         pokemonNumber = 0
     }
-    test(pokemonNumber)
+    test(base)
 }
 
-const test = async (number) => {
-    let base = await getData(`${api}/pokemon`)
-    let results = await base.results
-    let pokemon = results[number]
+
+const previouslyPokemon = () => {
+    if (pokemonNumber === 0){
+        pokemonNumber = 0
+    }else{
+        pokemonNumber -= 1
+        test(base)
+    }
+}
+
+
+const test = async (data) => {
+    if (actualBase !== data){
+        actualBase = await getData(data)
+    }
+    results = actualBase.results
+    nextPage = actualBase.next
+    pokemon = results[pokemonNumber]
     const dataPokemon = await getDataPokemons(pokemon)
     const textReset = resetText(dataPokemon.description)
     pokemonName.innerHTML = pokemon.name
     pokemonDescription.innerHTML = textReset
     pokemonImage.setAttribute('src', dataPokemon.pokemonImage)
+    imageContainer.classList.add(dataPokemon.firstType)
     pokemonFirstType.innerHTML = dataPokemon.firstType
     pokemonSecondType.innerHTML = dataPokemon.secondType
     pokemonHeight.innerHTML = dataPokemon.height
     pokemonWeight.innerHTML = dataPokemon.weight
     pokemonId.innerHTML = dataPokemon.pokemonId
+
+    if (pokemonNumber === 20){
+        return{
+            results,
+            s ,
+            nextPage
+        }
+    }
+
 }
-
-test(pokemonNumber)
-
-
-
-
-const previouslyPokemon = (pokemonNumber) => pokemonNumber - 1
-// const test = async () => {
-//     let base = await getData(api)
-//     let results = await base.results
-//     let nextPage = await base.next
-//     let r = await getData(nextPage)
-//     let counter = 0
-
-//     console.log(results.map(x => {
-//         counter += 1
-//         if (counter === 20 ){
-//             console.log('Test')
-//             return x.name
-//         } else{
-//             return x.name
-//         }
-//     }))
-// }
-
-// test()
-
+test(base)

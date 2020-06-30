@@ -97,7 +97,7 @@ const printPokemon = async () => {
     let base = await getData(`${api}/pokemon`)
     let results = await base.results
     let nextPage = await base.next
-    for(let index = 0; index <= 10; index++){
+    for(let index = 0; index <= 150; index++){
         if (index %20 === 0){
             for(let i = 0; i <= 19; i++){
                 const container = document.createElement('div') 
