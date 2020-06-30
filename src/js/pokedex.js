@@ -16,6 +16,8 @@ let nextPage
 
 let actualBase
 
+let prevClass
+
 const getData = async (API) => {
     const response = await fetch(API);
     const json = await response.json();
@@ -35,6 +37,8 @@ const getDataPokemons = async({ url }) => {
     let firstType = [ data.types.map(id => id.type.name)][0][0]
     let secondType = [ data.types.map(id => id.type.name)][0][1]
     secondType = checkUndefined(secondType)
+
+    prevClass = firstType
 
     return{
         data,
@@ -70,6 +74,7 @@ const checkUndefined = (variable) => {
 
 const nextPokemon = () => {
     pokemonNumber += 1
+    imageContainer.classList.remove(prevClass)
     if (pokemonNumber === 20){
         base = nextPage
         pokemonNumber = 0
@@ -82,6 +87,7 @@ const previouslyPokemon = () => {
     if (pokemonNumber === 0){
         pokemonNumber = 0
     }else{
+        imageContainer.classList.remove(prevClass)
         pokemonNumber -= 1
         test(base)
     }
@@ -100,6 +106,7 @@ const test = async (data) => {
     pokemonName.innerHTML = pokemon.name
     pokemonDescription.innerHTML = textReset
     pokemonImage.setAttribute('src', dataPokemon.pokemonImage)
+    imageContainer.classList.re
     imageContainer.classList.add(dataPokemon.firstType)
     pokemonFirstType.innerHTML = dataPokemon.firstType
     pokemonSecondType.innerHTML = dataPokemon.secondType
@@ -110,7 +117,7 @@ const test = async (data) => {
     if (pokemonNumber === 20){
         return{
             results,
-            s ,
+            actualBase,
             nextPage
         }
     }
