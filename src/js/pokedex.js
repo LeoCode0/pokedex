@@ -3,6 +3,7 @@ const api = 'https://pokeapi.co/api/v2';
 const inputId = document.getElementById('searchInput')
 const buttonSearch = document.getElementById('searchButton')
 const imageContainer = document.getElementById('container_image')
+const loader = document.getElementById('loader')
 const pokemonImage = document.getElementById('image')
 const pokemonFirstType = document.getElementById('firstType')
 const pokemonSecondType = document.getElementById('secondType')
@@ -46,7 +47,10 @@ const getDataPokemons = async({ url }) => {
     const height = (data.height / 10)
     const weight = (data.weight / 10)
     const pokemonSpecies = await getData(`${api}/pokemon-species/${pokemonId}/`)
-    const description = pokemonSpecies.flavor_text_entries[0].flavor_text
+    let description = pokemonSpecies.flavor_text_entries[0]
+    if (description.language.name !== 'en'){
+        description = pokemonSpecies.flavor_text_entries[1]
+    }
     let firstType = [ data.types.map(id => id.type.name)][0][0]
     let secondType = [ data.types.map(id => id.type.name)][0][1]
     secondType = checkUndefined(secondType)
@@ -76,9 +80,11 @@ nextPokemon.onclick = () => {
     pokemonImage.setAttribute('src', '')
     showPokemon(base)
     inputId.value = pokemonNumber + 1
+    loader.innerHTML = '<div class="lds-ripple"><div></div><div></div></div>'
 }
 
 previouslyPokemon.onclick = () => {
+    loader.innerHTML = '<div class="lds-ripple"><div></div><div></div></div>'
     if (pokemonNumber === 0){
         pokemonNumber = 150
     }
@@ -89,10 +95,10 @@ previouslyPokemon.onclick = () => {
     inputId.value = pokemonNumber + 1
 }
 
-const resetText = (text) => {
-    const sizeText = text.length
-    const firstLetter = text.substr(0, 1).toUpperCase()
-    const nextLetters = text.substr(1, sizeText).toLowerCase()
+const resetText = ({ flavor_text }) => {
+    const sizeText = flavor_text.length
+    const firstLetter = flavor_text.substr(0, 1).toUpperCase()
+    const nextLetters = flavor_text.substr(1, sizeText).toLowerCase()
 
     const newText = `${firstLetter}${nextLetters}`
     return newText
@@ -116,6 +122,8 @@ const showPokemon = async (data) => {
     const textReset = resetText(dataPokemon.description)
     pokemonName.innerHTML = pokemon.name
     pokemonDescription.innerHTML = textReset
+    loader.innerHTML = ''
+    pokemonImage.setAttribute('alt', dataPokemon.pokemonName)
     pokemonImage.setAttribute('src', dataPokemon.pokemonImage)
     imageContainer.classList.add(dataPokemon.firstType)
     pokemonFirstType.innerHTML = dataPokemon.firstType
