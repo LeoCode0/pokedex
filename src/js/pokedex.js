@@ -1,5 +1,7 @@
 const api = 'https://pokeapi.co/api/v2';
 
+const inputId = document.getElementById('searchInput')
+const buttonSearch = document.getElementById('searchButton')
 const imageContainer = document.getElementById('container_image')
 const pokemonImage = document.getElementById('image')
 const pokemonFirstType = document.getElementById('firstType')
@@ -10,10 +12,24 @@ const pokemonWeight = document.getElementById('weight')
 const pokemonHeight = document.getElementById('height')
 const pokemonId = document.getElementById('id')
 
-let pokemonNumber = 0
-let base = `${api}/pokemon?offset=0&limit=150`
+const nextPokemon = document.getElementById('next')
+const previouslyPokemon = document.getElementById('previously')
 
+let pokemonNumber = 0
+inputId.value = 1
+let base = `${api}/pokemon?offset=0&limit=150`
 let prevClass
+
+buttonSearch.onclick = () => {
+    let idPokemonInput = Math.abs(parseInt(inputId.value))
+    if (idPokemonInput > 150){
+        inputId.value = 150
+        idPokemonInput = 150
+    }
+    pokemonNumber = (idPokemonInput - 1)
+    imageContainer.classList.remove(prevClass)
+    showPokemon(base)
+}
 
 const getData = async (API) => {
     const response = await fetch(API);
@@ -51,6 +67,28 @@ const getDataPokemons = async({ url }) => {
     }
 }
 
+nextPokemon.onclick = () => {
+    pokemonNumber += 1
+    if (pokemonNumber === 150){
+        pokemonNumber = 0
+    }
+    imageContainer.classList.remove(prevClass)
+    pokemonImage.setAttribute('src', '')
+    showPokemon(base)
+    inputId.value = pokemonNumber + 1
+}
+
+previouslyPokemon.onclick = () => {
+    if (pokemonNumber === 0){
+        pokemonNumber = 150
+    }
+    pokemonNumber -= 1
+    imageContainer.classList.remove(prevClass)
+    image.setAttribute('src', '')
+    showPokemon(base)
+    inputId.value = pokemonNumber + 1
+}
+
 const resetText = (text) => {
     const sizeText = text.length
     const firstLetter = text.substr(0, 1).toUpperCase()
@@ -69,29 +107,8 @@ const checkUndefined = (variable) => {
 }
 
 
-const nextPokemon = () => {
-    pokemonNumber += 1
-    if (pokemonNumber === 150){
-        pokemonNumber = 0
-    }
-    imageContainer.classList.remove(prevClass)
-    pokemonImage.setAttribute('src', '')
-    test(base)
-}
 
-
-const previouslyPokemon = () => {
-    if (pokemonNumber === 0){
-        pokemonNumber = 150
-    }
-    pokemonNumber -= 1
-    imageContainer.classList.remove(prevClass)
-    image.setAttribute('src', '')
-    test(base)
-}
-
-
-const test = async (data) => {
+const showPokemon = async (data) => {
     const actualBase = await getData(data)
     results = actualBase.results
     pokemon = results[pokemonNumber]
@@ -108,4 +125,4 @@ const test = async (data) => {
     pokemonId.innerHTML = dataPokemon.pokemonId
 
 }
-test(base)
+showPokemon(base)

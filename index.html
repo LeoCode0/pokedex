@@ -3,14 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./src/css/main.css">
+    <script src="https://kit.fontawesome.com/1db2702c51.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="src/css/pokedex.css">
     <title>Pokedex</title>
 </head>
 <body>
-    <h1 class="title">Pokedex</h1>
-    <div id="central">
-        
-    </div>
-    <script src="src/index.js"></script>
+    <main class="pokedex">
+        <div class="pokedex__general">
+            <div class="pokedex__general--search">
+                <input type="number" min="1" max="150" name="" id="searchInput" class="general__search--input">
+                <input type="button" value="Search" class="general__search--button" id="searchButton">
+            </div>
+            <div class="pokedex__general--image" id="container_image">
+                <img src="" alt="" class="general--image__img" id="image">
+            </div>
+            <div class="pokedex__general--arrows">
+                <i class="fas fa-caret-right general__arrows--previously" id="previously" onclick="previouslyPokemon()"></i>
+                <i class="fas fa-caret-right general__arrows--next" id="next" onclick="nextPokemon()"></i>
+            </div>
+            <div class="pokedex__general--types">
+                <span class="general--types__firstType" id="firstType"></span>
+                <span class="general--types__secondType" id="secondType"></span>
+            </div>
+        </div>
+        <div class="pokedex__specify">
+            <h2 class="pokedex__specify--name" id="name"></h2>
+            <span class="pokedex__specify--id">ID: <span id="id"></span></span>
+            <p class="pokedex__specify--description" id="description"></p>
+            <span class="pokedex__specify--weight">Weight: <span id="weight"></span> Kilograms</span>
+            <span class="pokedex__specify--height">Height: <span id="height"></span> Meters</span>
+        </div>
+    </main>
+    <script src="./src/js/pokedex.js"></script>
 </body>
 </html>
