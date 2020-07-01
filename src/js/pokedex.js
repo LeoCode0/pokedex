@@ -47,6 +47,7 @@ const getDataPokemons = async({ url }) => {
     const height = (data.height / 10)
     const weight = (data.weight / 10)
     const pokemonSpecies = await getData(`${api}/pokemon-species/${pokemonId}/`)
+    const stats = data.stats.map(number => number.base_stat)
     let description = pokemonSpecies.flavor_text_entries[0]
     if (description.language.name !== 'en'){
         description = pokemonSpecies.flavor_text_entries[1]
@@ -65,6 +66,7 @@ const getDataPokemons = async({ url }) => {
         height,
         weight,
         pokemonSpecies,
+        stats,
         description,
         firstType,
         secondType
@@ -72,6 +74,7 @@ const getDataPokemons = async({ url }) => {
 }
 
 nextPokemon.onclick = () => {
+    pokemonImage.setAttribute('alt', '')
     pokemonNumber += 1
     if (pokemonNumber === 150){
         pokemonNumber = 0
@@ -85,6 +88,7 @@ nextPokemon.onclick = () => {
 
 previouslyPokemon.onclick = () => {
     loader.innerHTML = '<div class="lds-ripple"><div></div><div></div></div>'
+    pokemonImage.setAttribute('alt', '')
     if (pokemonNumber === 0){
         pokemonNumber = 150
     }
@@ -120,17 +124,17 @@ const showPokemon = async (data) => {
     pokemon = results[pokemonNumber]
     const dataPokemon = await getDataPokemons(pokemon)
     const textReset = resetText(dataPokemon.description)
-    pokemonName.innerHTML = pokemon.name
-    pokemonDescription.innerHTML = textReset
-    loader.innerHTML = ''
+    pokemonName.textContent = pokemon.name
+    pokemonDescription.textContent = textReset
+    loader.textContent = ''
     pokemonImage.setAttribute('alt', dataPokemon.pokemonName)
     pokemonImage.setAttribute('src', dataPokemon.pokemonImage)
     imageContainer.classList.add(dataPokemon.firstType)
-    pokemonFirstType.innerHTML = dataPokemon.firstType
-    pokemonSecondType.innerHTML = dataPokemon.secondType
-    pokemonHeight.innerHTML = dataPokemon.height
-    pokemonWeight.innerHTML = dataPokemon.weight
-    pokemonId.innerHTML = dataPokemon.pokemonId
-
+    pokemonFirstType.textContent = dataPokemon.firstType
+    pokemonSecondType.textContent = dataPokemon.secondType
+    pokemonHeight.textContent = dataPokemon.height
+    pokemonWeight.textContent = dataPokemon.weight
+    pokemonId.textContent = dataPokemon.pokemonId
+    document.getElementById('hp').textContent = dataPokemon.stats[0]
 }
 showPokemon(base)
