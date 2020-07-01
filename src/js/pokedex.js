@@ -7,6 +7,12 @@ const loader = document.getElementById('loader')
 const pokemonImage = document.getElementById('image')
 const pokemonFirstType = document.getElementById('firstType')
 const pokemonSecondType = document.getElementById('secondType')
+const pokemonHp = document.getElementById('hp')
+const pokemonAttack = document.getElementById('attack')
+const pokemonDefense = document.getElementById('defense')
+const pokemonSpecial_Attack = document.getElementById('special-attack')
+const pokemonSpecial_Defense = document.getElementById('special-defense')
+const pokemonSpeed = document.getElementById('speed')
 const pokemonName = document.getElementById('name')
 const pokemonDescription = document.getElementById('description')
 const pokemonWeight = document.getElementById('weight')
@@ -135,6 +141,11 @@ const showPokemon = async (data) => {
     pokemonHeight.textContent = dataPokemon.height
     pokemonWeight.textContent = dataPokemon.weight
     pokemonId.textContent = dataPokemon.pokemonId
-    document.getElementById('hp').textContent = dataPokemon.stats[0]
+    pokemonHp.textContent = dataPokemon.stats[0]
+    pokemonAttack.textContent = dataPokemon.stats[1]
+    pokemonDefense.textContent = dataPokemon.stats[2]
+    pokemonSpecial_Defense.textContent = dataPokemon.stats[3]
+    pokemonSpecial_Attack.textContent = dataPokemon.stats[4]
+    pokemonSpeed.textContent = dataPokemon.stats[5]
 }
 showPokemon(base)

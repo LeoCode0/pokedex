@@ -50,11 +50,28 @@ body{
 }
 
 .pokedex__general--search{
+    display: flex;
+    flex-direction: row-reverse;
+    margin-right: 1%;
     margin-bottom: 15px;
 }
 
-.general--search__input{
-    width: 3px;
+.general__search--input{
+    position: relative;
+    height: 30px;
+    width: 80%;
+    padding: 0 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: 0;
+}
+
+.general__search--button{
+    position: absolute;
+    height: 30px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: 0;
 }
 
 .pokedex__general, .pokedex__specify{
