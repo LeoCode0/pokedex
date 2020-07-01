@@ -46,6 +46,15 @@ body{
     border: 6px solid #641220;
     border-radius: 14px;
     margin: 5vh 5vw;
+    
+}
+
+.pokedex__general--search{
+    margin-bottom: 15px;
+}
+
+.general--search__input{
+    
 }
 
 .pokedex__general, .pokedex__specify{

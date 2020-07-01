@@ -10,16 +10,16 @@
 <body>
     <main class="pokedex">
         <div class="pokedex__general">
+            <div class="pokedex__general--search">
+                <input type="number" min="1" max="150" name="" id="searchInput" class="general__search--input">
+                <input type="button" value="Search" class="general__search--button" id="searchButton">
+            </div>
             <div class="pokedex__general--image" id="container_image">
                 <img src="" alt="" class="general--image__img" id="image">
             </div>
             <div class="pokedex__general--arrows">
-                <button id="previously" title="previously" onclick="previouslyPokemon()">
-                    <i class="fas fa-caret-right general__arrows--previously" ></i>
-                </button>
-                <button id="next" onclick="nextPokemon()" title="next">
-                    <i class="fas fa-caret-right general__arrows--next"></i>
-                </button>
+                <i class="fas fa-caret-right general__arrows--previously" id="previously" onclick="previouslyPokemon()"></i>
+                <i class="fas fa-caret-right general__arrows--next" id="next" onclick="nextPokemon()"></i>
             </div>
             <div class="pokedex__general--types">
                 <span class="general--types__firstType" id="firstType"></span>

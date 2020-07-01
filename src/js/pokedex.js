@@ -11,10 +11,7 @@ const pokemonHeight = document.getElementById('height')
 const pokemonId = document.getElementById('id')
 
 let pokemonNumber = 0
-let base = `${api}/pokemon`
-let nextPage
-
-let actualBase
+let base = `${api}/pokemon?offset=0&limit=150`
 
 let prevClass
 
@@ -74,53 +71,41 @@ const checkUndefined = (variable) => {
 
 const nextPokemon = () => {
     pokemonNumber += 1
-    imageContainer.classList.remove(prevClass)
-    if (pokemonNumber === 20){
-        base = nextPage
+    if (pokemonNumber === 150){
         pokemonNumber = 0
     }
+    imageContainer.classList.remove(prevClass)
+    pokemonImage.setAttribute('src', '')
     test(base)
 }
 
 
 const previouslyPokemon = () => {
     if (pokemonNumber === 0){
-        pokemonNumber = 0
-    }else{
-        imageContainer.classList.remove(prevClass)
-        pokemonNumber -= 1
-        test(base)
+        pokemonNumber = 150
     }
+    pokemonNumber -= 1
+    imageContainer.classList.remove(prevClass)
+    image.setAttribute('src', '')
+    test(base)
 }
 
 
 const test = async (data) => {
-    if (actualBase !== data){
-        actualBase = await getData(data)
-    }
+    const actualBase = await getData(data)
     results = actualBase.results
-    nextPage = actualBase.next
     pokemon = results[pokemonNumber]
     const dataPokemon = await getDataPokemons(pokemon)
     const textReset = resetText(dataPokemon.description)
     pokemonName.innerHTML = pokemon.name
     pokemonDescription.innerHTML = textReset
     pokemonImage.setAttribute('src', dataPokemon.pokemonImage)
-    imageContainer.classList.re
     imageContainer.classList.add(dataPokemon.firstType)
     pokemonFirstType.innerHTML = dataPokemon.firstType
     pokemonSecondType.innerHTML = dataPokemon.secondType
     pokemonHeight.innerHTML = dataPokemon.height
     pokemonWeight.innerHTML = dataPokemon.weight
     pokemonId.innerHTML = dataPokemon.pokemonId
-
-    if (pokemonNumber === 20){
-        return{
-            results,
-            actualBase,
-            nextPage
-        }
-    }
 
 }
 test(base)
