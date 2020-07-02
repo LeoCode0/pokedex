@@ -122,16 +122,22 @@ body{
     border: 0;
 }
 
+.pokedex__general--types{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 .pokedex__general--stats{
     display: grid;
     height: 20%;
     width: 100%;
-    grid-template-columns: 40% 80%;
-    grid-template-rows: repeat(6, 60px);
+    grid-template-columns: 40% 60%;
 }
 
 .general__stats--span{
     display: flex;
+    margin: 6px 0;
 }
 
 .pokedex__specify--name{
@@ -139,7 +145,17 @@ body{
 }
 
 .progress_bar{
-    margin-left: 102px;
+    margin: 6px 0;
+    background-color: white;
+}
+
+.progress_bar > span{
+    display: flex;
+    justify-content: center;
+    max-width: 100%;
+    height: 100%;
+    font-size: 1rem;
+    background-color: #fcbf49;
 }
 
 #weight, #height{

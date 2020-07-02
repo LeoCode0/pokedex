@@ -26,9 +26,9 @@ let pokemonNumber = 0;
 inputId.value = 1;
 let base = `${api}/pokemon?offset=0&limit=150`;
 let prevClass = {
-    bgPokemon: '',
-    firstTypePokemon: '',
-    secondTypePokemon: ''
+  bgPokemon: "",
+  firstTypePokemon: "",
+  secondTypePokemon: "",
 };
 
 buttonSearch.onclick = () => {
@@ -118,18 +118,25 @@ const resetDefaultValues = () => {
   pokemonImage.setAttribute("src", "");
   imageContainer.classList.remove(prevClass.bgPokemon);
   pokemonFirstType.classList.remove(prevClass.firstTypePokemon);
-  if (prevClass.secondTypePokemon !== ''){
+  if (prevClass.secondTypePokemon !== "") {
     pokemonSecondType.classList.remove(prevClass.secondTypePokemon);
   }
   inputId.value = pokemonNumber + 1;
-}
+};
 
 const checkUndefined = (variable) => {
   if (variable === undefined) {
-    return '';
+    return "";
   } else {
     return variable;
   }
+};
+
+const showStatsValue = (listStats, data) => {
+  listStats.map((x, key) => {
+    x.textContent = data[key];
+    x.style.width = `${x.textContent}%`;
+  });
 };
 
 const showPokemon = async (data) => {
@@ -147,17 +154,22 @@ const showPokemon = async (data) => {
   pokemonFirstType.textContent = dataPokemon.firstType;
   pokemonFirstType.classList.add(dataPokemon.firstType);
   pokemonSecondType.textContent = dataPokemon.secondType;
-  if (dataPokemon.secondType !== ''){
+  pokemonSecondType.classList.remove("type");
+  if (dataPokemon.secondType !== "") {
+    pokemonSecondType.classList.add("type");
     pokemonSecondType.classList.add(dataPokemon.secondType);
   }
   pokemonHeight.textContent = dataPokemon.height;
   pokemonWeight.textContent = dataPokemon.weight;
   pokemonId.textContent = dataPokemon.pokemonId;
-  pokemonHp.textContent = dataPokemon.stats[0];
-  pokemonAttack.textContent = dataPokemon.stats[1];
-  pokemonDefense.textContent = dataPokemon.stats[2];
-  pokemonSpecial_Defense.textContent = dataPokemon.stats[3];
-  pokemonSpecial_Attack.textContent = dataPokemon.stats[4];
-  pokemonSpeed.textContent = dataPokemon.stats[5];
+  const stats = [
+    pokemonHp,
+    pokemonAttack,
+    pokemonDefense,
+    pokemonSpecial_Defense,
+    pokemonSpecial_Attack,
+    pokemonSpeed,
+  ];
+  showStatsValue(stats, dataPokemon.stats);
 };
 showPokemon(base);
