@@ -25,7 +25,11 @@ const previouslyPokemon = document.getElementById("previously");
 let pokemonNumber = 0;
 inputId.value = 1;
 let base = `${api}/pokemon?offset=0&limit=150`;
-let prevClass;
+let prevClass = {
+    bgPokemon: '',
+    firstTypePokemon: '',
+    secondTypePokemon: ''
+};
 
 buttonSearch.onclick = () => {
   let idPokemonInput = Math.abs(parseInt(inputId.value));
@@ -34,7 +38,7 @@ buttonSearch.onclick = () => {
     idPokemonInput = 150;
   }
   pokemonNumber = idPokemonInput - 1;
-  imageContainer.classList.remove(prevClass);
+  resetDefaultValues();
   showPokemon(base);
 };
 
@@ -62,7 +66,9 @@ const getDataPokemons = async ({ url }) => {
   let secondType = [data.types.map((id) => id.type.name)][0][1];
   secondType = checkUndefined(secondType);
 
-  prevClass = firstType;
+  prevClass.bgPokemon = firstType;
+  prevClass.firstTypePokemon = firstType;
+  prevClass.secondTypePokemon = secondType;
 
   return {
     data,
@@ -80,29 +86,21 @@ const getDataPokemons = async ({ url }) => {
 };
 
 nextPokemon.onclick = () => {
-  pokemonImage.setAttribute("alt", "");
   pokemonNumber += 1;
   if (pokemonNumber === 150) {
     pokemonNumber = 0;
   }
-  imageContainer.classList.remove(prevClass);
-  pokemonImage.setAttribute("src", "");
+  resetDefaultValues();
   showPokemon(base);
-  inputId.value = pokemonNumber + 1;
-  loader.innerHTML = '<div class="lds-ripple"><div></div><div></div></div>';
 };
 
 previouslyPokemon.onclick = () => {
-  loader.innerHTML = '<div class="lds-ripple"><div></div><div></div></div>';
-  pokemonImage.setAttribute("alt", "");
   if (pokemonNumber === 0) {
     pokemonNumber = 150;
   }
   pokemonNumber -= 1;
-  imageContainer.classList.remove(prevClass);
-  image.setAttribute("src", "");
+  resetDefaultValues();
   showPokemon(base);
-  inputId.value = pokemonNumber + 1;
 };
 
 const resetText = ({ flavor_text }) => {
@@ -114,9 +112,21 @@ const resetText = ({ flavor_text }) => {
   return newText;
 };
 
+const resetDefaultValues = () => {
+  loader.innerHTML = '<div class="lds-ripple"><div></div><div></div></div>';
+  pokemonImage.setAttribute("alt", "");
+  pokemonImage.setAttribute("src", "");
+  imageContainer.classList.remove(prevClass.bgPokemon);
+  pokemonFirstType.classList.remove(prevClass.firstTypePokemon);
+  if (prevClass.secondTypePokemon !== ''){
+    pokemonSecondType.classList.remove(prevClass.secondTypePokemon);
+  }
+  inputId.value = pokemonNumber + 1;
+}
+
 const checkUndefined = (variable) => {
   if (variable === undefined) {
-    return "";
+    return '';
   } else {
     return variable;
   }
@@ -135,7 +145,11 @@ const showPokemon = async (data) => {
   pokemonImage.setAttribute("src", dataPokemon.pokemonImage);
   imageContainer.classList.add(dataPokemon.firstType);
   pokemonFirstType.textContent = dataPokemon.firstType;
+  pokemonFirstType.classList.add(dataPokemon.firstType);
   pokemonSecondType.textContent = dataPokemon.secondType;
+  if (dataPokemon.secondType !== ''){
+    pokemonSecondType.classList.add(dataPokemon.secondType);
+  }
   pokemonHeight.textContent = dataPokemon.height;
   pokemonWeight.textContent = dataPokemon.weight;
   pokemonId.textContent = dataPokemon.pokemonId;

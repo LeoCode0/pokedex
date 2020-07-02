@@ -75,6 +75,7 @@ body{
 }
 
 .pokedex__general, .pokedex__specify{
+    max-height: 89vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -121,8 +122,24 @@ body{
     border: 0;
 }
 
+.pokedex__general--stats{
+    display: grid;
+    height: 20%;
+    width: 100%;
+    grid-template-columns: 40% 80%;
+    grid-template-rows: repeat(6, 60px);
+}
+
+.general__stats--span{
+    display: flex;
+}
+
 .pokedex__specify--name{
     text-transform: capitalize;
+}
+
+.progress_bar{
+    margin-left: 102px;
 }
 
 #weight, #height{
@@ -153,6 +170,71 @@ body{
 .normal{
     background-color: var(--bg-Normal);
     border: var(--border-card) var(--color-normal-strong);
+}
+
+
+.type{
+    padding: 8px 12px;
+    border: 0;
+    border-radius: 10px;
+}
+
+.type.grass{
+    background-color: var(--color-grass-strong);
+}
+
+.type.poison{
+    background-color: violet;
+}
+
+.type.fire{
+    background-color: var(--color-fire-strong);
+}
+
+.type.water{
+    background-color: blue;
+}
+
+.type.bug{
+    color: white;
+    background-color: var(--color-bug-strong);
+}
+
+.type.normal{
+    color: white;
+    background-color: var(--color-normal-strong);
+}
+
+.type.flying{
+    color: black;
+    background-color: silver;
+}
+
+.type.electric{
+    color: black;
+    background-color: yellow;
+}
+
+.type.ground{
+    background-color: brown;
+}
+
+.type.psychic{
+    background-color: purple;
+}
+
+.type.rock{
+    background-color: lightslategray;
+}
+
+.type.steel{
+    color: black;
+    background-color: silver;
+}
+
+.type.ice{
+    color: black;
+    background-color: snow;
 }
 
 
