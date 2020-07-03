@@ -33,11 +33,31 @@ let prevClass = {
 
 buttonSearch.onclick = () => {
   let idPokemonInput = Math.abs(parseInt(inputId.value));
-  if (idPokemonInput > 150) {
-    inputId.value = 150;
-    idPokemonInput = 150;
+  switch (true) {
+    case inputId.value === "":
+      console.log("S");
+      break;
+    case idPokemonInput === 0:
+      inputId.value = 1;
+      idPokemonInput = 1;
+      showPokemonById(idPokemonInput);
+      break;
+    case idPokemonInput > 150:
+      inputId.value = 150;
+      idPokemonInput = 150;
+      showPokemonById(idPokemonInput);
+      break;
+    case idPokemonInput === parseInt(pokemonId.textContent):
+      console.log("SWWX");
+      break;
+    default:
+      showPokemonById(idPokemonInput);
+      break;
   }
-  pokemonNumber = idPokemonInput - 1;
+};
+
+const showPokemonById = (id) => {
+  pokemonNumber = id - 1;
   resetDefaultValues();
   showPokemon(base);
 };
@@ -116,10 +136,23 @@ const resetDefaultValues = () => {
   loader.innerHTML = '<div class="lds-ripple"><div></div><div></div></div>';
   pokemonImage.setAttribute("alt", "");
   pokemonImage.setAttribute("src", "");
+  pokemonFirstType.textContent = "";
+  pokemonHp.textContent = "-";
+  pokemonAttack.textContent = "-";
+  pokemonDefense.textContent = "-";
+  pokemonSpecial_Attack.textContent = "-";
+  pokemonSpecial_Defense.textContent = "-";
+  pokemonSpeed.textContent = "-";
+  pokemonName.textContent = "-";
+  pokemonId.textContent = "-";
+  pokemonDescription.textContent = "-";
+  pokemonWeight.textContent = "-";
+  pokemonHeight.textContent = "-";
   imageContainer.classList.remove(prevClass.bgPokemon);
   pokemonFirstType.classList.remove(prevClass.firstTypePokemon);
   if (prevClass.secondTypePokemon !== "") {
     pokemonSecondType.classList.remove(prevClass.secondTypePokemon);
+    pokemonSecondType.textContent = "";
   }
   inputId.value = pokemonNumber + 1;
 };
