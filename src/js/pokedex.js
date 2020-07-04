@@ -73,9 +73,20 @@ const getData = async (API) => {
   return json;
 };
 
+const checkLanguage = (data) => {
+  let entryNumber = 0
+  if (data[entryNumber].language.name !== 'en'){
+    entryNumber += 1
+    return data[entryNumber]
+  } else{
+    return data[entryNumber]
+  }
+}
+
 const showEffectEntry = async ({ url }) => {
   const data = await getData(url)
-  return data.effect_entries[0].effect
+  const dataLanguageEN = checkLanguage(data.effect_entries)
+  return dataLanguageEN.short_effect
 }
 
 const getDataPokemons = async ({ url }) => {
@@ -149,6 +160,11 @@ const resetDefaultValues = () => {
   pokemonImage.setAttribute("alt", "");
   pokemonImage.setAttribute("src", "");
   pokemonFirstType.textContent = "";
+  pokemonSecondAbility.style.display = 'inline-block'
+  pokemonFirstAbility.textContent = '-'
+  firstAbilityDescription.textContent = '-'
+  secondAbilityDescription.textContent = '-'
+  pokemonSecondAbility.textContent = '-'
   pokemonHp.textContent = "-";
   pokemonAttack.textContent = "-";
   pokemonDefense.textContent = "-";
@@ -206,8 +222,13 @@ const showPokemon = async (data) => {
     pokemonSecondType.classList.add(dataPokemon.secondType);
   }
   pokemonFirstAbility.textContent = dataPokemon.pokemonAbilities[0].ability.name
-  // document.getElementById('test').textContent = await showEffectEntry(dataPokemon.pokemonAbilities[0].ability)
-  pokemonSecondAbility.textContent = dataPokemon.pokemonAbilities[1].ability.name
+  firstAbilityDescription.textContent = await showEffectEntry(dataPokemon.pokemonAbilities[0].ability)
+  if (checkUndefined(dataPokemon.pokemonAbilities[1]) === ''){
+    pokemonSecondAbility.style.display = 'none'
+  } else{
+    pokemonSecondAbility.textContent = dataPokemon.pokemonAbilities[1].ability.name
+    secondAbilityDescription.textContent = await showEffectEntry(dataPokemon.pokemonAbilities[1].ability)
+  }
   pokemonHeight.textContent = dataPokemon.height;
   pokemonWeight.textContent = dataPokemon.weight;
   pokemonId.textContent = dataPokemon.pokemonId;

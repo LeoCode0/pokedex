@@ -11,30 +11,41 @@ body{
 :root{
     --color-light: white;
     --color-dark: black;
-    /* --bg-fighting:;
-    --bg-poison:;
-    --bg-flying:;
-    --bg-ground:; 
-    --bg-rock:; 
+    /*
     --bg-ghost:; 
     --bg-steel:; 
     --bg-dark:; 
     --bg-dragon:; 
-    --bg-electric:;
-    --bg-fairy:; 
-    --bg-psychic:; 
-    --bg-ice:; */
+    */
     --border-card: 6px solid;
     --bg-grass: lightgreen;
     --bg-fire: #f7a399;
-    --bg-water: #0077b6;
-    --bg-bug: #55a630;
-    --bg-Normal: #5c6b73;
-    --color-grass-strong: green;
-    --color-fire-strong: #ef6351;
-    --color-water-strong: #023e8a;
-    --color-bug-strong: #007f5f;
+    --bg-water: #aed9e0;
+    --bg-bug: #90be6d;
+    --bg-Normal: #f1faee;
+    --bg-flying: #edf2f4;
+    --bg-poison: #bdb2ff;
+    --bg-electric: #fcbf49;
+    --bg-ground: #e29578; 
+    --bg-fairy: #f1faee; 
+    --bg-fighting: #e5989b;
+    --bg-psychic: #bdb2ff; 
+    --bg-rock: #8d99ae; 
+    --bg-ice: snow;
+    --color-grass-strong: #2a9d8f;
+    --color-fire-strong: #d00000;
+    --color-water-strong:  #457b9d;
+    --color-bug-strong: #43aa8b;
     --color-normal-strong: #253237;
+    --color-flying-strong: #8d99ae;
+    --color-poison-strong: #8338ec;
+    --color-electric-strong: #f77f00;
+    --color-ground-strong: #540b0e;
+    --color-fairy-strong: #edf2f4;
+    --color-fighting-strong: #ffb4a2;
+    --color-psychic-strong: #8900f2;
+    --color-rock-strong: #2b2d42;
+    --color-ice-strong: #577399; 
 }
 
 .pokedex{
@@ -183,7 +194,7 @@ body{
     text-align: center;
     padding: 10px 0;
     border-radius: 10px;
-    background-color: blue;
+    background-color: #e9c46a;
 }
 
 .grass{
@@ -211,6 +222,49 @@ body{
     border: var(--border-card) var(--color-normal-strong);
 }
 
+.flying{
+    background-color: var(--bg-flying);
+    border: var(--border-card) var(--color-flying-strong);
+}
+
+.poison{
+    background-color: var(--bg-poison);
+    border: var(--border-card) var(--color-poison-strong);
+}
+
+.electric{
+    background-color: var(--bg-electric);
+    border: var(--border-card) var(--color-electric-strong);
+}
+
+.ground{
+    background-color: var(--bg-ground);
+    border: var(--border-card) var(--color-ground-strong);
+}
+.fairy{
+    background-color: var(--bg-fairy);
+    border: var(--border-card) var(--color-fairy-strong);
+}
+
+.fighting{
+    background-color: var(--bg-fighting);
+    border: var(--border-card) var(--color-fighting-strong);
+}
+
+.psychic{
+    background-color: var(--bg-psychic);
+    border: var(--border-card) var(--color-psychic-strong);
+}
+
+.rock{
+    background-color: var(--bg-rock);
+    border: var(--border-card) var(--color-rock-strong);
+}
+
+.ice{
+    background-color: var(--bg-ice);
+    border: var(--border-card) var(--color-ice-strong);
+}
 
 .type{
     padding: 8px 12px;
@@ -218,6 +272,7 @@ body{
     margin: 0 10px;
     border-radius: 10px;
     cursor: default;
+    text-transform: capitalize;
 }
 
 .type.grass{
@@ -225,15 +280,18 @@ body{
 }
 
 .type.poison{
-    background-color: violet;
+    color: var(--color-light);
+    background-color: var(--color-poison-strong);
 }
 
 .type.fire{
+    color: var(--color-light);
     background-color: var(--color-fire-strong);
 }
 
 .type.water{
-    background-color: blue;
+    color: var(--color-light);
+    background-color: var(--color-water-strong);
 }
 
 .type.bug{
@@ -248,24 +306,27 @@ body{
 
 .type.flying{
     color: var(--color-dark);
-    background-color: silver;
+    background-color: var(--color-flying-strong);
 }
 
 .type.electric{
     color: var(--color-dark);
-    background-color: yellow;
+    background-color: var(--bg-electric);
 }
 
 .type.ground{
-    background-color: brown;
+    color: var(--color-light);
+    background-color: var(--color-ground-strong);
 }
 
 .type.psychic{
-    background-color: purple;
+    color: var(--color-light);
+    background-color: var(--color-psychic-strong);
 }
 
 .type.rock{
-    background-color: lightslategray;
+    color: var(--color-light);
+    background-color: var(--color-rock-strong);
 }
 
 .type.steel{
@@ -275,9 +336,16 @@ body{
 
 .type.ice{
     color: var(--color-dark);
-    background-color: snow;
+    background-color: var(--bg-ice);
 }
 
+.type.fairy{
+    background-color: var(--color-fairy-strong);
+}
+
+.type.fighting{
+    background-color: var(--color-fighting-strong);
+}
 
 @keyframes zoom{
     from{
