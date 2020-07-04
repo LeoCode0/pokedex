@@ -15,7 +15,6 @@ body{
     --bg-ghost:; 
     --bg-steel:; 
     --bg-dark:; 
-    --bg-dragon:; 
     */
     --border-card: 6px solid;
     --bg-grass: lightgreen;
@@ -32,6 +31,7 @@ body{
     --bg-psychic: #bdb2ff; 
     --bg-rock: #8d99ae; 
     --bg-ice: snow;
+    --bg-dragon: #a01a7d; 
     --color-grass-strong: #2a9d8f;
     --color-fire-strong: #d00000;
     --color-water-strong:  #457b9d;
@@ -46,6 +46,7 @@ body{
     --color-psychic-strong: #8900f2;
     --color-rock-strong: #2b2d42;
     --color-ice-strong: #577399; 
+    --color-dragon-strong: #7b1e7a;
 }
 
 .pokedex{
@@ -266,6 +267,11 @@ body{
     border: var(--border-card) var(--color-ice-strong);
 }
 
+.dragon{
+    background-color: var(--bg-dragon);
+    border: var(--border-card) var(--color-dragon-strong);
+}
+
 .type{
     padding: 8px 12px;
     border: 0;
@@ -347,6 +353,11 @@ body{
     background-color: var(--color-fighting-strong);
 }
 
+.type.dragon{
+    color: var(--color-light);
+    background-color: var(--bg-dragon);
+}
+
 @keyframes zoom{
     from{
         height: 100%;
@@ -389,4 +400,24 @@ body{
       height: 72px;
       opacity: 0;
     }
+  }
+
+  @media (max-width: 769px){
+      .pokedex{
+          height: 180vh;
+          grid-template-columns: 90vw;
+          grid-template-rows: 90vh 90vh;
+      }
+      .pokedex__general, .pokedex__specify{
+          grid-column: 1 / 2;
+          border: 0;
+      }
+      .pokedex__general{
+          width: 99%;
+          grid-row: 1 / 2;
+          border-bottom: 1px solid var(--color-dark);
+      }
+      .pokedex__specify{
+          grid-row: 2 / 3;
+      }
   }
