@@ -35,7 +35,7 @@ buttonSearch.onclick = () => {
   let idPokemonInput = Math.abs(parseInt(inputId.value));
   switch (true) {
     case inputId.value === "":
-      console.log("S");
+      document.getElementById('warning').innerHTML = 'Please write an id in the input'
       break;
     case idPokemonInput === 0:
       inputId.value = 1;
@@ -48,7 +48,7 @@ buttonSearch.onclick = () => {
       showPokemonById(idPokemonInput);
       break;
     case idPokemonInput === parseInt(pokemonId.textContent):
-      console.log("SWWX");
+      document.getElementById('warning').innerHTML = 'Please write a different id'
       break;
     default:
       showPokemonById(idPokemonInput);
@@ -71,6 +71,8 @@ const getData = async (API) => {
 
 const getDataPokemons = async ({ url }) => {
   const data = await getData(url);
+  console.log(data)
+  const pokemonAbilities = data.abilities
   const pokemonId = data.id;
   const pokemonName = data.name;
   const pokemonImage = data.sprites.front_default;
@@ -92,6 +94,7 @@ const getDataPokemons = async ({ url }) => {
 
   return {
     data,
+    pokemonAbilities,
     pokemonId,
     pokemonName,
     pokemonImage,
@@ -133,6 +136,7 @@ const resetText = ({ flavor_text }) => {
 };
 
 const resetDefaultValues = () => {
+  document.getElementById('warning').innerHTML = ''
   loader.innerHTML = '<div class="lds-ripple"><div></div><div></div></div>';
   pokemonImage.setAttribute("alt", "");
   pokemonImage.setAttribute("src", "");

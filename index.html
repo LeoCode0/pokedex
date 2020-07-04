@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-16">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A pokedex maked with the Api of pokeapi.co, only includes the first 150 pokemons">
     <script src="https://kit.fontawesome.com/1db2702c51.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="src/css/pokedex.css">
     <title>Pokedex</title>
@@ -10,7 +11,8 @@
 <body>
     <main class="pokedex">
         <div class="pokedex__general">
-            <div class="pokedex__general--search">
+            <span id="warning"></span>
+            <div class="pokedex__general--search" id="container_input">
                 <input type="number" min="1" max="150" id="searchInput" class="general__search--input" placeholder="Pokemon number">
                 <input type="button" value="Search" class="general__search--button" id="searchButton">
             </div>
@@ -64,6 +66,9 @@
             <p class="pokedex__specify--description" id="description"></p>
             <span class="pokedex__specify--weight">Weight: <span id="weight"></span> Kilograms</span>
             <span class="pokedex__specify--height">Height: <span id="height"></span> Meters</span>
+            <div class="pokedex__specify--abilities">
+
+            </div>
         </div>
     </main>
     <script src="./src/js/pokedex.js"></script>
