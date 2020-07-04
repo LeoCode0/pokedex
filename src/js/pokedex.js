@@ -7,6 +7,10 @@ const loader = document.getElementById("loader");
 const pokemonImage = document.getElementById("image");
 const pokemonFirstType = document.getElementById("firstType");
 const pokemonSecondType = document.getElementById("secondType");
+const pokemonFirstAbility = document.getElementById('firstAbility');
+const firstAbilityDescription = document.getElementById('firstAbilityDescription')
+const pokemonSecondAbility = document.getElementById('secondAbility');
+const secondAbilityDescription = document.getElementById('secondAbilityDescription')
 const pokemonHp = document.getElementById("hp");
 const pokemonAttack = document.getElementById("attack");
 const pokemonDefense = document.getElementById("defense");
@@ -69,9 +73,13 @@ const getData = async (API) => {
   return json;
 };
 
+const showEffectEntry = async ({ url }) => {
+  const data = await getData(url)
+  return data.effect_entries[0].effect
+}
+
 const getDataPokemons = async ({ url }) => {
   const data = await getData(url);
-  console.log(data)
   const pokemonAbilities = data.abilities
   const pokemonId = data.id;
   const pokemonName = data.name;
@@ -176,6 +184,7 @@ const showStatsValue = (listStats, data) => {
   });
 };
 
+
 const showPokemon = async (data) => {
   const actualBase = await getData(data);
   results = actualBase.results;
@@ -196,6 +205,9 @@ const showPokemon = async (data) => {
     pokemonSecondType.classList.add("type");
     pokemonSecondType.classList.add(dataPokemon.secondType);
   }
+  pokemonFirstAbility.textContent = dataPokemon.pokemonAbilities[0].ability.name
+  // document.getElementById('test').textContent = await showEffectEntry(dataPokemon.pokemonAbilities[0].ability)
+  pokemonSecondAbility.textContent = dataPokemon.pokemonAbilities[1].ability.name
   pokemonHeight.textContent = dataPokemon.height;
   pokemonWeight.textContent = dataPokemon.weight;
   pokemonId.textContent = dataPokemon.pokemonId;
