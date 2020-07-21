@@ -194,9 +194,9 @@ const checkUndefined = (variable) => {
 };
 
 const showStatsValue = (listStats, data) => {
-  listStats.map((x, key) => {
-    x.textContent = data[key];
-    x.style.width = `${x.textContent}%`;
+  listStats.map((stat, key) => {
+    stat.textContent = data[key];
+    stat.style.width = `${stat.textContent}%`;
   });
 };
 
